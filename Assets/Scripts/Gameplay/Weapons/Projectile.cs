@@ -1,25 +1,39 @@
+using System.Collections;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
     [SerializeField] private float speed = 10f;
     [SerializeField] private int damage = 1;
-
+    [SerializeField] private float lifeTime = 3f;
+    private ObjectPool pool;
     private Vector2 direction;
-
-    public void SetDirection(Vector2 _direction)
+    private Coroutine lifeCoroutine;
+    public void Initialize(ObjectPool pool, Vector2 direction)
     {
-        direction = _direction;
+        this.pool = pool;
+        this.direction = direction;
     }
-
     private void Update()
     {
-        if(direction == null)
+        transform.position += (Vector3)(speed * Time.deltaTime * direction);
+    }
+    private void OnEnable()
+    {
+        lifeCoroutine = StartCoroutine(BulletLifeCoroutine());
+    }
+    private void OnDisable()
+    {
+        if(lifeCoroutine != null)
         {
-            Destroy(gameObject);
-            return;
+            StopCoroutine(lifeCoroutine);
+            lifeCoroutine = null;
         }
-        transform.Translate(direction * speed * Time.deltaTime);
+    }
+    IEnumerator BulletLifeCoroutine()
+    {
+        yield return new WaitForSeconds(lifeTime);
+        pool.Return(gameObject);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -31,7 +45,7 @@ public class Projectile : MonoBehaviour
         {
             enemyHealth.TakeDamage(damage);
         }
-        Destroy(gameObject);
+        pool.Return(gameObject);
     }
 
 }

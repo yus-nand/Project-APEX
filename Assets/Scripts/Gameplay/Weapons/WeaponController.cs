@@ -3,10 +3,9 @@ using UnityEngine;
 public class WeaponController : MonoBehaviour
 {
     [Header("Weapon Settings")]
-    
-    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private ObjectPool bulletPool;
     [SerializeField] private Transform firePoint;
-    [SerializeField] private float fireRate = 1f;
+    [SerializeField] private float fireInterval = 1f;
     [SerializeField] private float range = 10f;
 
     private float fireTimer;
@@ -15,7 +14,7 @@ public class WeaponController : MonoBehaviour
     {
         fireTimer += Time.deltaTime;
 
-        if(fireTimer >= fireRate)
+        if(fireTimer >= fireInterval)
         {
             Transform target = FindNearestEnemy();
 
@@ -46,10 +45,11 @@ public class WeaponController : MonoBehaviour
     }
     private void Shoot(Transform target)
     {
-        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, Quaternion.identity);
+        GameObject bullet = bulletPool.Get();
+        bullet.transform.position = firePoint.position;
+        bullet.transform.rotation = Quaternion.identity;
         Projectile projectile = bullet.GetComponent<Projectile>();
-
-        Vector2 direction = target.position - transform.position;
-        projectile.SetDirection(direction);
+        Vector2 direction = (target.position - firePoint.position).normalized;
+        projectile.Initialize(bulletPool, direction);
     }
 }
