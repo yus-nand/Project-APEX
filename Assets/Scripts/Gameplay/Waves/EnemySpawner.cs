@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [Header("Spawner Settings")]
+    [SerializeField] private ObjectPool enemyPool;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private float spawnInterval;
@@ -22,7 +23,9 @@ public class EnemySpawner : MonoBehaviour
     private void SpawnEnemy()
     {
         int randomIndex = Random.Range(0, spawnPoints.Length);
-
-        Instantiate(enemyPrefab, spawnPoints[randomIndex].position, Quaternion.identity);
+        GameObject enemy = enemyPool.Get();
+        EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+        enemyHealth.Initialize(enemyPool, spawnPoints[randomIndex].position);
+        // Instantiate(enemyPrefab, spawnPoints[randomIndex].position, Quaternion.identity);
     }
 }

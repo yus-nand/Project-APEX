@@ -3,6 +3,7 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private int maxHealth = 3;
+    ObjectPool pool;
     private int currentHealth;
 
     private void Awake()
@@ -17,8 +18,13 @@ public class EnemyHealth : MonoBehaviour
             Die();
         }
     }
+    public void Initialize(ObjectPool pool, Vector3 position)
+    {
+        this.pool = pool;
+        transform.position = position;
+    }
     private void Die()
     {
-        Destroy(gameObject);
+        pool.Return(gameObject);
     }
 }

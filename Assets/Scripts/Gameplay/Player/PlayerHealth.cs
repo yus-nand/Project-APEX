@@ -9,6 +9,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int maxHealth = 10;
     [Header("Invulnerability Settings")]
     [SerializeField] private float invulnerabilityDuration = 1f;
+    [Header("References")]
+    [SerializeField] private SpriteFlash spriteFlash;
 
     private int currentHealth;
     private bool isInvulnerable;
@@ -26,6 +28,7 @@ public class PlayerHealth : MonoBehaviour
             return;
 
         currentHealth -= damage;
+        spriteFlash.Flash();
         OnHealthChanged?.Invoke(currentHealth, maxHealth);
 
         Debug.Log($"Player HP: {currentHealth}");
