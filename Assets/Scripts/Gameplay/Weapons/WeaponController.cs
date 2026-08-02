@@ -52,4 +52,12 @@ public class WeaponController : MonoBehaviour
         Vector2 direction = (target.position - firePoint.position).normalized;
         projectile.Initialize(bulletPool, direction);
     }
+    public void IncreaseDamage(int buff)
+    {
+        
+    }
+    public void MultiplyFireRate(float multplier)
+    {
+        
+    }
 }

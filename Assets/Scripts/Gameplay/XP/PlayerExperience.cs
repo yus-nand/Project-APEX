@@ -4,17 +4,27 @@ using UnityEngine;
 public class PlayerExperience : MonoBehaviour
 {
     public event Action<int, int> OnXPChanged;
-    [SerializeField] private int xpToNextLevel = 10;
+    [SerializeField] private LevelDatabase levelDatabase;
+    private int currentLevel = 1;
     private int currentXP;
-
+    private int XPToNextLevel => levelDatabase.GetLevelData(currentLevel).xpRequired;
     public void AddXP(int amount)
     {
-        Debug.Log("Xp Added");
         currentXP += amount;
-        OnXPChanged?.Invoke(currentXP, xpToNextLevel);
+        while(currentXP >= XPToNextLevel)
+        {
+            currentXP -= XPToNextLevel;
+            LevelUp();
+        }
+        OnXPChanged?.Invoke(currentXP, XPToNextLevel);
     }
     public void NotifyXPChanged()
     {
-        OnXPChanged?.Invoke(currentXP, xpToNextLevel);
+        OnXPChanged?.Invoke(currentXP, XPToNextLevel);
+    }
+    public void LevelUp()
+    {
+        currentLevel++;
+        Debug.Log($"Player level up {currentLevel - 1} -> {currentLevel}");
     }
 }
