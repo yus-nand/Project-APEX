@@ -5,6 +5,7 @@ public class PlayerExperience : MonoBehaviour
 {
     public event Action<int, int> OnXPChanged;
     [SerializeField] private LevelDatabase levelDatabase;
+    [SerializeField] private UpgradeManager upgradeManager;
     private int currentLevel = 1;
     private int currentXP;
     private int XPToNextLevel => levelDatabase.GetLevelData(currentLevel).xpRequired;
@@ -26,5 +27,6 @@ public class PlayerExperience : MonoBehaviour
     {
         currentLevel++;
         Debug.Log($"Player level up {currentLevel - 1} -> {currentLevel}");
+        upgradeManager.ShowUpgradeSelection();
     }
 }

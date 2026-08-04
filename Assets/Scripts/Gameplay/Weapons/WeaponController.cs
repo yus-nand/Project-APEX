@@ -54,10 +54,10 @@ public class WeaponController : MonoBehaviour
     }
     public void IncreaseDamage(int buff)
     {
-        
+        Debug.Log("Damage Boost applied!");
     }
-    public void MultiplyFireRate(float multplier)
+    public void MultiplyFireRate(float multiplier)
     {
-        
+        Debug.Log("Speed Boost applied!");
     }
 }

@@ -58,4 +58,11 @@ public class PlayerHealth : MonoBehaviour
         AudioManager.Instance.Play(dieSound, 1f);
         Debug.Log("Game Over");
     }
+    public void IncreaseMaxHealth(int amount)
+    {
+        maxHealth += amount;
+        currentHealth += amount;
+        OnHealthChanged?.Invoke(currentHealth, maxHealth);
+        Debug.Log("HP boost applied");
+    }
 }
