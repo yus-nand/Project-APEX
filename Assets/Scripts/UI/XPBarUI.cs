@@ -19,9 +19,9 @@ public class XPBarUI : MonoBehaviour
     {
         playerExperience.OnXPChanged -= UpdateXPBar;
     }
-    private void UpdateXPBar(int currentXP, int xpToNextLevel)
+    private void UpdateXPBar(float currentXP, float xpToNextLevel)
     {
-        float percentage = (float)currentXP / xpToNextLevel;
+        float percentage = currentXP / xpToNextLevel;
         fillRect.sizeDelta = new Vector2(maxWidth * percentage, fillRect.sizeDelta.y);
     }
 }

@@ -3,20 +3,23 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] private float speed = 10f;
+    [SerializeField] private float baseSpeed = 10f;
+    private float currentSpeed;
     [SerializeField] private int damage = 1;
     [SerializeField] private float lifeTime = 3f;
     private ObjectPool pool;
     private Vector2 direction;
     private Coroutine lifeCoroutine;
-    public void Initialize(ObjectPool pool, Vector2 direction)
+    public void Initialize(ObjectPool pool, Vector2 direction, float speedMutiplier, int damage)
     {
         this.pool = pool;
+        currentSpeed = baseSpeed * speedMutiplier;
         this.direction = direction;
+        this.damage = damage;
     }
     private void Update()
     {
-        transform.position += (Vector3)(speed * Time.deltaTime * direction);
+        transform.position += (Vector3)(currentSpeed * Time.deltaTime * direction);
     }
     private void OnEnable()
     {
@@ -44,5 +47,4 @@ public class Projectile : MonoBehaviour
         }
         pool.Return(gameObject);
     }
-
 }

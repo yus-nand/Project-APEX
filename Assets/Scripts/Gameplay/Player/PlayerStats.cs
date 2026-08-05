@@ -12,24 +12,27 @@ public class PlayerStats : MonoBehaviour
     [Header("Projectile")]
     [SerializeField] private float baseFireInterval = 1f;
     [SerializeField] private float baseProjectileSpeedMultiplier = 1f;
+    [SerializeField] private int baseProjectileBurstAmount = 1;
     private float fireIntervalMultiplier = 1f;
-    private float projectileSpeedMutiplierBuff = 1f;
+    private float projectileSpeedMultiplierBuff = 1f;
+    private int projectileBurstBuff = 0;
     [Header("Movingment")]
     [SerializeField] private float baseMoveSpeed = 5f;
     private float moveSpeedBonus = 0f;
     [Header("Experience")]
-    [SerializeField] private float baseXP_Buff = 1f;
+    [SerializeField] private float baseXP_Reward = 1f;
     private float xpBuff = 1f;
     [Header("Pickup")]
-    [SerializeField] private float baseAttractionRadiusBuff = 0f;
+    [SerializeField] private float attractionRadius = 0f;
     private float attractionRadiusBuff = 0f;
 
     public int Damage => baseDamage + damageBonus;
     public float FireInterval => baseFireInterval * fireIntervalMultiplier;
+    public float ProjectileSpeedMultilpier => baseProjectileSpeedMultiplier * projectileSpeedMultiplierBuff;
+    public int ProjectileBurstAmount => baseProjectileBurstAmount + projectileBurstBuff;
     public float MoveSpeed => baseMoveSpeed + moveSpeedBonus;
-    public float ProjectileSpeedMutilpier => baseProjectileSpeedMultiplier * projectileSpeedMutiplierBuff;
-    public float XP_Buff => baseXP_Buff * xpBuff;
-    public float AttractionRadiusBuff => baseAttractionRadiusBuff + attractionRadiusBuff;
+    public float XP_Reward => baseXP_Reward * xpBuff;
+    public float AttractionRadius => attractionRadius + attractionRadiusBuff;
 
     #region Damage
     public void IncreaseDamage(int amount)
@@ -45,7 +48,11 @@ public class PlayerStats : MonoBehaviour
     }
     public void IncreaseProjectileSpeed(float multiplier)
     {
-        projectileSpeedMutiplierBuff *= multiplier;
+        projectileSpeedMultiplierBuff *= multiplier;
+    }
+    public void IncreaseBurstAmount(int buff)
+    {
+        projectileBurstBuff += buff;
     }
     #endregion
 

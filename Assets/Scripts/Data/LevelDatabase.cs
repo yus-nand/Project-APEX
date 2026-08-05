@@ -14,5 +14,5 @@ public class LevelDatabase : ScriptableObject
 public class LevelData
 {
     public int level;
-    public int xpRequired;
+    public float xpRequired;
 }

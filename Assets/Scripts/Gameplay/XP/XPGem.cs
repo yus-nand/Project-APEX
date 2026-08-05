@@ -2,24 +2,23 @@ using UnityEngine;
 
 public class XPGem : MonoBehaviour
 {
-    [SerializeField] private int xpValue = 1;
     [Header("Attraction Settings")]
-    [SerializeField] private float attractionRadius = 2f;
     [SerializeField] private float initialSpeed = 3f;
     [SerializeField] private float acceleration = 15f;
-
     private Transform player;
+    private PlayerStats stats;
     private bool isAttracted;
     private float currentSpeed;
 
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        stats = player.GetComponent<PlayerStats>();
     }
     private void Update()
     {
         float distance = Vector3.Distance(transform.position, player.position);
-        if(distance <= attractionRadius)
+        if(distance <= stats.AttractionRadius)
             isAttracted = true;
 
         if(isAttracted)
@@ -35,11 +34,11 @@ public class XPGem : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         PlayerExperience playerXP = other.GetComponent<PlayerExperience>();
-
+        PlayerStats stats = other.GetComponent<PlayerStats>();
         if(playerXP == null)
             return;
 
-        playerXP.AddXP(xpValue);
+        playerXP.AddXP(stats.XP_Reward);
         Destroy(gameObject);
     }
 }

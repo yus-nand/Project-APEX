@@ -2,11 +2,10 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private float moveSpeed;
-
+    // [SerializeField] private float moveSpeed;
     private Rigidbody2D rb;
     private PlayerControls controls;
-
+    [SerializeField] private PlayerStats stats;
     private Vector2 moveInput;
 
     private void Awake()
@@ -21,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        rb.linearVelocity = moveInput * moveSpeed;
+        rb.linearVelocity = moveInput * stats.MoveSpeed;
     }
     private void OnEnable()
     {

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,8 +21,8 @@ public class UpgradePanelUI : MonoBehaviour
     {
         Debug.Log("Setting up upgrades on UI");
         panel.SetActive(true);
-        
-        for(int i = 0;i < upgrades.Count; i++)
+
+        for(int i = 0;i < cards.Length; i++)
         {
             cards[i].Setup(upgrades[i], this);
         }

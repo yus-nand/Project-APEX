@@ -5,8 +5,10 @@ public class WeaponController : MonoBehaviour
     [Header("Weapon Settings")]
     [SerializeField] private ObjectPool bulletPool;
     [SerializeField] private Transform firePoint;
-    [SerializeField] private float fireInterval = 1f;
+    // [SerializeField] private float fireInterval = 1f;
     [SerializeField] private float range = 10f;
+    [Header("Other Refernces")]
+    [SerializeField] private PlayerStats stats;
 
     private float fireTimer;
 
@@ -14,7 +16,7 @@ public class WeaponController : MonoBehaviour
     {
         fireTimer += Time.deltaTime;
 
-        if(fireTimer >= fireInterval)
+        if(fireTimer >= stats.FireInterval)
         {
             Transform target = FindNearestEnemy();
 
@@ -50,14 +52,6 @@ public class WeaponController : MonoBehaviour
         bullet.transform.rotation = Quaternion.identity;
         Projectile projectile = bullet.GetComponent<Projectile>();
         Vector2 direction = (target.position - firePoint.position).normalized;
-        projectile.Initialize(bulletPool, direction);
-    }
-    public void IncreaseDamage(int buff)
-    {
-        Debug.Log("Damage Boost applied!");
-    }
-    public void MultiplyFireRate(float multiplier)
-    {
-        Debug.Log("Speed Boost applied!");
+        projectile.Initialize(bulletPool, direction, stats.ProjectileSpeedMultilpier, stats.Damage);
     }
 }

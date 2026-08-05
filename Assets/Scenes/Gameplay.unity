@@ -909,6 +909,7 @@ GameObject:
   - component: {fileID: 464535130}
   - component: {fileID: 464535132}
   - component: {fileID: 464535133}
+  - component: {fileID: 464535134}
   - component: {fileID: 464535129}
   - component: {fileID: 464535128}
   m_Layer: 6
@@ -1012,8 +1013,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponController
   bulletPool: {fileID: 508732530}
   firePoint: {fileID: 2083551143}
-  fireInterval: 0.2
   range: 10
+  stats: {fileID: 464535134}
 --- !u!114 &464535131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1026,7 +1027,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f2122920123d4e4896578e111f848fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
-  moveSpeed: 5
+  stats: {fileID: 464535134}
 --- !u!114 &464535132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1059,6 +1060,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerExperience
   levelDatabase: {fileID: 11400000, guid: 21226b3d4103af9478d0fc49bb7b1b6e, type: 2}
   upgradeManager: {fileID: 97765247}
+--- !u!114 &464535134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 464535126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e482d48c9b38d46a91bc2f7e9aba67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
+  baseDamage: 1
+  baseFireInterval: 1
+  baseProjectileSpeedMultiplier: 1
+  baseProjectileBurstAmount: 1
+  baseMoveSpeed: 5
+  baseXP_Reward: 4
+  attractionRadius: 4
 --- !u!1 &508732529
 GameObject:
   m_ObjectHideFlags: 0
