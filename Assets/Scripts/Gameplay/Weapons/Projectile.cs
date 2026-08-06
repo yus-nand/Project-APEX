@@ -40,11 +40,11 @@ public class Projectile : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Bullet Hit: " + other.name);
         EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
-        if(enemyHealth != null)
-        {
-            enemyHealth.TakeDamage(damage);
-        }
+        if(enemyHealth == null)
+            return;
+        enemyHealth.TakeDamage(damage);
         pool.Return(gameObject);
     }
 }

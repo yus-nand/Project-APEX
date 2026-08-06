@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class WeaponController : MonoBehaviour
@@ -5,26 +6,39 @@ public class WeaponController : MonoBehaviour
     [Header("Weapon Settings")]
     [SerializeField] private ObjectPool bulletPool;
     [SerializeField] private Transform firePoint;
+    [SerializeField] private float burstDelay = 0.08f;
     // [SerializeField] private float fireInterval = 1f;
     [SerializeField] private float range = 10f;
     [Header("Other Refernces")]
     [SerializeField] private PlayerStats stats;
 
-    private float fireTimer;
-
-    private void Update()
+    private void Start()
     {
-        fireTimer += Time.deltaTime;
-
-        if(fireTimer >= stats.FireInterval)
+        StartCoroutine(ShootingLoop());
+    }
+    private IEnumerator ShootingLoop()
+    {
+        while (true)
         {
             Transform target = FindNearestEnemy();
 
-            if(target != null)
+            if (target == null)
             {
-                Shoot(target);
-                fireTimer = 0f;
+                yield return null;
+                continue;
             }
+            yield return FireBurst(target);     // yielding ShootingLoop (pausing  it until FireBurst() is done) INSANEEE
+
+            yield return new WaitForSeconds(stats.FireInterval);
+        }
+    }
+    private IEnumerator FireBurst(Transform target)
+    {
+        for(int i = 0; i < stats.ProjectileBurstAmount; i++)
+        {
+            Shoot(target);
+            if(i < stats.ProjectileBurstAmount - 1)
+                yield return new WaitForSeconds(burstDelay);
         }
     }
 

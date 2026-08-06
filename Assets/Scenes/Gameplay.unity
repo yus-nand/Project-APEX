@@ -1013,6 +1013,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WeaponController
   bulletPool: {fileID: 508732530}
   firePoint: {fileID: 2083551143}
+  burstDelay: 0.08
   range: 10
   stats: {fileID: 464535134}
 --- !u!114 &464535131
