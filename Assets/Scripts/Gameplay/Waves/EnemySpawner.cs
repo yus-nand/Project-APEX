@@ -6,21 +6,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private ObjectPool enemyPool;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private Transform[] spawnPoints;
-    [SerializeField] private float spawnInterval;
-
-    private float timer;
-
-    private void Update()
-    {
-        timer += Time.deltaTime;
-
-        if(timer >= spawnInterval)
-        {
-            SpawnEnemy();
-            timer = 0f;
-        }
-    }
-    private void SpawnEnemy()
+    
+    public void SpawnEnemy()
     {
         int randomIndex = Random.Range(0, spawnPoints.Length);
         GameObject enemy = enemyPool.Get();
