@@ -1,4 +1,6 @@
+using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public enum WaveState
@@ -13,7 +15,15 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private WaveDatabase waveDatabase;
     [SerializeField] private EnemySpawner spawner;
     [SerializeField] private StartNextWaveButton button;
+    public event Action<float> OnRemainingTimerChanged;
+    public event Action<int> OnWaveStarted;
+    public event Action<string> OnCountdownStarted;
+    public event Action<bool> OnCountdownVisibilityChanged;
+    // public event Action<int> OnWaveEnded;
+
     public float RemainingTimer {get; private set;}
+    public float CurrentWave => currentWaveIndex + 1;
+    public WaveState CurrentState => state;
     private int currentWaveIndex;
     private bool skipRequested = false;
     private WaveState state;
@@ -37,16 +47,23 @@ public class WaveManager : MonoBehaviour
     }
     private IEnumerator Countdown(int waveNumber)
     {
-        Debug.Log($"Wave {waveNumber} begins in: ");
+        // waveCountdownText.gameObject.SetActive(true);
+        // waveNumberText.text = $"Wave: {waveNumber}";
+        OnCountdownVisibilityChanged?.Invoke(true);
         for(int i = 3; i > 0; i--)
         {
-            Debug.Log(i);
-            yield return new WaitForSeconds(1f);
+            OnCountdownStarted?.Invoke($"Wave starts in {i}s ...");
+            yield return new WaitForSeconds(1f);    
         }
-        Debug.Log("GO!");
+        OnCountdownStarted?.Invoke("GO!!");
+        yield return new WaitForSeconds(1f);
+        OnCountdownVisibilityChanged?.Invoke(false);
+        // waveCountdownText.gameObject.SetActive(false);
+
     }
     private IEnumerator RunWave(WaveData wave)
     {
+        OnWaveStarted?.Invoke(currentWaveIndex + 1);
         float elapsedTimer = 0f;
         float spawnTimer = 0f;
         bool SpawningFinished = false;
@@ -56,9 +73,11 @@ public class WaveManager : MonoBehaviour
             elapsedTimer += Time.deltaTime;
             spawnTimer += Time.deltaTime;
             RemainingTimer = wave.duration - elapsedTimer;
+            OnRemainingTimerChanged?.Invoke(RemainingTimer);
             Debug.Log(RemainingTimer);
             if(skipRequested)
             {
+                OnRemainingTimerChanged?.Invoke(0);
                 break;
             }
             if(!SpawningFinished && spawnTimer >= wave.spawnInterval)
