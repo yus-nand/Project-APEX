@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
-using TMPro;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum WaveState
@@ -19,7 +20,6 @@ public class WaveManager : MonoBehaviour
     public event Action<int> OnWaveStarted;
     public event Action<string> OnCountdownStarted;
     public event Action<bool> OnCountdownVisibilityChanged;
-    // public event Action<int> OnWaveEnded;
 
     public float RemainingTimer {get; private set;}
     public float CurrentWave => currentWaveIndex + 1;
@@ -37,7 +37,7 @@ public class WaveManager : MonoBehaviour
     {
         while(currentWaveIndex < waveDatabase.Waves.Count)
         {
-            yield return Countdown(currentWaveIndex + 1);   
+            yield return Countdown();   
             skipRequested = false; 
             state = WaveState.Spawning;
             yield return RunWave(waveDatabase.Waves[currentWaveIndex]);
@@ -45,10 +45,8 @@ public class WaveManager : MonoBehaviour
         }
         Debug.Log("All Waves Completed");
     }
-    private IEnumerator Countdown(int waveNumber)
+    private IEnumerator Countdown()
     {
-        // waveCountdownText.gameObject.SetActive(true);
-        // waveNumberText.text = $"Wave: {waveNumber}";
         OnCountdownVisibilityChanged?.Invoke(true);
         for(int i = 3; i > 0; i--)
         {
@@ -58,34 +56,39 @@ public class WaveManager : MonoBehaviour
         OnCountdownStarted?.Invoke("GO!!");
         yield return new WaitForSeconds(1f);
         OnCountdownVisibilityChanged?.Invoke(false);
-        // waveCountdownText.gameObject.SetActive(false);
-
     }
     private IEnumerator RunWave(WaveData wave)
     {
+        Queue<EnemyData> enemiesToSpawn = new Queue<EnemyData>();           
+        foreach(EnemySpawnInfo spawnInfo in wave.spawnInfos)                   
+        {
+            for(int i = 0;i < spawnInfo.count; i++)
+            {
+                enemiesToSpawn.Enqueue(spawnInfo.enemyData);
+            }
+        }
+        Debug.Log(enemiesToSpawn.Count);
         OnWaveStarted?.Invoke(currentWaveIndex + 1);
         float elapsedTimer = 0f;
         float spawnTimer = 0f;
         bool SpawningFinished = false;
-        int enemiesSpawned = 0;
-        while(elapsedTimer < wave.duration)
+        while(elapsedTimer < wave.duration)             // spawning logic
         {
             elapsedTimer += Time.deltaTime;
             spawnTimer += Time.deltaTime;
             RemainingTimer = wave.duration - elapsedTimer;
             OnRemainingTimerChanged?.Invoke(RemainingTimer);
-            Debug.Log(RemainingTimer);
-            if(skipRequested)
+            // Debug.Log(RemainingTimer);
+            if(skipRequested)                       //skip wave? break the loop and return, starta new wave.
             {
                 OnRemainingTimerChanged?.Invoke(0);
                 break;
             }
             if(!SpawningFinished && spawnTimer >= wave.spawnInterval)
             {
-                spawner.SpawnEnemy();
-                enemiesSpawned++;
+                spawner.SpawnEnemy(enemiesToSpawn.Dequeue());       // we dequeue here. thus the COUNT property also gets modified
                 spawnTimer = 0;
-                if(enemiesSpawned >= wave.enemyCount)
+                if(enemiesToSpawn.Count == 0)           // no enemies left to spawn in queue.
                 {
                     Debug.Log("Spawning Complete");
                     SpawningFinished = true;                    

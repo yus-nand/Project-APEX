@@ -2,17 +2,20 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField] private EnemyPoolManager enemyPoolManager;
     [Header("Spawner Settings")]
-    [SerializeField] private ObjectPool enemyPool;
-    [SerializeField] private GameObject enemyPrefab;
+    // [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private Transform[] spawnPoints;
     
-    public void SpawnEnemy()
+    public void SpawnEnemy(EnemyData data)
     {
         int randomIndex = Random.Range(0, spawnPoints.Length);
-        GameObject enemy = enemyPool.Get();
+        PooledEnemy pooledEnemy = enemyPoolManager.Get(data);
+        if(pooledEnemy == null)
+            return;
+
+        GameObject enemy = pooledEnemy.gameObject;
         EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
-        enemyHealth.Initialize(enemyPool, spawnPoints[randomIndex].position);
-        // Instantiate(enemyPrefab, spawnPoints[randomIndex].position, Quaternion.identity);
+        enemyHealth.Initialize(pooledEnemy.pool, spawnPoints[randomIndex].position);
     }
 }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2866f523e79fa549ab0da68e1ec02ed, type: 3}
+  m_Name: Jombie
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyData
+  enemyName: Jombie
+  prefab: {fileID: 2762049729330723589, guid: f3b6cdc5e735b9d43980ef46ffef5f23, type: 3}
+  maxHealth: 10
+  moveSpeed: 3
+  contactDamage: 2
+  xpReward: 1
