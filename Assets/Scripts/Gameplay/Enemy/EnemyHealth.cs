@@ -2,9 +2,10 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    private ObjectPool pool;
+    private ObjectPool xpGemPool;
     [SerializeField] private int maxHealth = 3;
-    [SerializeField] private GameObject xpGemPrefab;
-    ObjectPool pool;
+    private int xpGemCount;
     private int currentHealth;
 
     private void Awake()
@@ -19,15 +20,26 @@ public class EnemyHealth : MonoBehaviour
             Die();
         }
     }
-    public void Initialize(ObjectPool pool, Vector3 position)
+    public void Initialize(ObjectPool pool, Vector3 position, EnemyData data, ObjectPool xpGemPool)
     {
         this.pool = pool;
+        this.xpGemPool = xpGemPool;
         transform.position = position;
+        maxHealth = data.maxHealth;
+        gameObject.GetComponent<EnemyMovement>().MoveSpeed = data.moveSpeed;
+        gameObject.GetComponent<EnemyDamage>().Damage = data.contactDamage;
+        xpGemCount = data.xpGemCount;
         currentHealth = maxHealth;
     }
     private void Die()
     {
-        Instantiate(xpGemPrefab, transform.position, Quaternion.identity);
+        Vector3 deathPosition = transform.position;
         pool.Return(gameObject);
+        for(int i = 0; i < xpGemCount; i++)
+        {
+            GameObject xpGem = xpGemPool.Get();
+            XPGem gem = xpGem.GetComponent<XPGem>();
+            gem.Initialize(deathPosition, xpGemPool);
+        }
     }
 }

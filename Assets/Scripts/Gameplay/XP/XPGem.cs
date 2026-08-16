@@ -9,6 +9,7 @@ public class XPGem : MonoBehaviour
     private PlayerStats stats;
     private bool isAttracted;
     private float currentSpeed;
+    private ObjectPool pool;
 
     private void Start()
     {
@@ -30,6 +31,7 @@ public class XPGem : MonoBehaviour
     private void OnEnable()
     {
         currentSpeed = initialSpeed;
+        isAttracted = false;
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -39,6 +41,11 @@ public class XPGem : MonoBehaviour
             return;
 
         playerXP.AddXP(stats.XP_Reward);
-        Destroy(gameObject);
+        pool.Return(gameObject);
+    }
+    public void Initialize(Vector3 position, ObjectPool _pool)
+    {
+        transform.position = position;
+        pool = _pool;
     }
 }

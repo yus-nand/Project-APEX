@@ -7,8 +7,8 @@ public class EnemyData : ScriptableObject
     [Header("Prefab")]
     public GameObject prefab;
     [Header("Stats")]
-    public float maxHealth = 10f;
+    public int maxHealth = 10;
     public float moveSpeed = 3f;
-    public float contactDamage = 2f;
-    public float xpReward = 1;
+    public int contactDamage = 2;
+    public int xpGemCount = 1;
 }

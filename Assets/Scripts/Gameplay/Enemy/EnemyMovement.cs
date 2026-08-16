@@ -6,6 +6,17 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float moveSpeed;
     private Rigidbody2D rb;
     private Transform player;
+    public float MoveSpeed
+    {
+        get
+        {
+            return moveSpeed;
+        }
+        set
+        {
+            moveSpeed = value;
+        }
+    }
 
     private void Awake()
     {
