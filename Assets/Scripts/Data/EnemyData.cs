@@ -11,4 +11,5 @@ public class EnemyData : ScriptableObject
     public float moveSpeed = 3f;
     public int contactDamage = 2;
     public int xpGemCount = 1;
+    public float recoveryDuration = 1f;
 }

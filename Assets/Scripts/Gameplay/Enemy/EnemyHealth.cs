@@ -4,9 +4,11 @@ public class EnemyHealth : MonoBehaviour
 {
     private ObjectPool pool;
     private ObjectPool xpGemPool;
-    [SerializeField] private int maxHealth = 3;
+    private int maxHealth = 3;
     private int xpGemCount;
     private int currentHealth;
+    private float recoveryDuration;
+    public float RecoveryDuration => recoveryDuration;
 
     private void Awake()
     {
@@ -30,6 +32,7 @@ public class EnemyHealth : MonoBehaviour
         gameObject.GetComponent<EnemyDamage>().Damage = data.contactDamage;
         xpGemCount = data.xpGemCount;
         currentHealth = maxHealth;
+        recoveryDuration = data.recoveryDuration;
 
         EnemyStateMachine stateMachine = GetComponent<EnemyStateMachine>();
         stateMachine.Initialize(new ChaseState(stateMachine, GetComponent<EnemyMovement>()));

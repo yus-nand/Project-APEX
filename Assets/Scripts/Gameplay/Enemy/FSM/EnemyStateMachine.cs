@@ -25,7 +25,7 @@ public class EnemyStateMachine : MonoBehaviour
     {
         if(CurrentState is ChaseState)
         {
-            ChangeState(new AttackState(this, GetComponent<EnemyMovement>(), GetComponent<EnemyDamage>()));
+            ChangeState(new AttackState(this, GetComponent<EnemyMovement>(), GetComponent<EnemyDamage>(), GetComponent<EnemyHealth>()));
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)

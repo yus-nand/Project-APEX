@@ -4,11 +4,13 @@ public class AttackState : EnemyState
 {
     private EnemyMovement movement;
     private EnemyDamage damage;
+    private EnemyHealth health;
 
-    public AttackState(EnemyStateMachine stateMachine, EnemyMovement movement, EnemyDamage damage) : base(stateMachine)
+    public AttackState(EnemyStateMachine stateMachine, EnemyMovement movement, EnemyDamage damage, EnemyHealth health) : base(stateMachine)
     {
         this.movement = movement;
         this.damage = damage;
+        this.health = health;
     }
     public override void Enter()
     {
@@ -17,6 +19,6 @@ public class AttackState : EnemyState
         damage.DealDamage();
 
         Debug.Log("sRECOVERY: Entering recovery state");
-        stateMachine.ChangeState(new RecoveryState(stateMachine, movement));
+        stateMachine.ChangeState(new RecoveryState(stateMachine, movement, movement.gameObject.GetComponent<EnemyHealth>()));
     }
 }
