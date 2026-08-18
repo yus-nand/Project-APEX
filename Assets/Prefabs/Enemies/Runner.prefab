@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4824521757602167140}
   - component: {fileID: 8086871857246505451}
   - component: {fileID: 5221989241570649598}
+  - component: {fileID: -2344409202133214446}
   - component: {fileID: 7393469115739318932}
   - component: {fileID: 313937976308384909}
   m_Layer: 7
@@ -108,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06f95232ba92cc44b9b49b1730beed29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
+  attackRange: 1
   moveSpeed: 5
 --- !u!114 &8086871857246505451
 MonoBehaviour:
@@ -122,7 +124,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
   maxHealth: 3
-  xpGemPrefab: {fileID: 5907501606462217880, guid: 33ee9b40f26f753429e3bd1f39fb146d, type: 3}
 --- !u!114 &5221989241570649598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,6 +137,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyDamage
   damage: 1
+  attackRange: 1
+--- !u!114 &-2344409202133214446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3279616993175668571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb3e9e22e0b4da840986fdd8e82910fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStateMachine
 --- !u!50 &7393469115739318932
 Rigidbody2D:
   serializedVersion: 5

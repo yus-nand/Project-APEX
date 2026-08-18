@@ -6,6 +6,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float moveSpeed;
     private Rigidbody2D rb;
     private Transform player;
+    private bool movementEnabled = true;
     public float MoveSpeed
     {
         get
@@ -31,10 +32,19 @@ public class EnemyMovement : MonoBehaviour
             player = playerObject.transform;
         }
     }
+    public void SetMovementEnabled(bool enabled)
+    {
+        Debug.Log($"E_MOVEMENT: movement = {enabled}");
+        movementEnabled = enabled;
+        if(!enabled)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+    }
 
     private void FixedUpdate()
     {
-        if(player == null)
+        if(player == null || !movementEnabled)
             return;
 
         Vector2 direction = (player.position - transform.position).normalized;

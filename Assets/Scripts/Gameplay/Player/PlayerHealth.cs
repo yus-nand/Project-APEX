@@ -32,6 +32,7 @@ public class PlayerHealth : MonoBehaviour
             return;
 
         currentHealth -= damage;
+        Debug.Log("PLAYER: took damage");
         spriteFlash.Flash();
         CameraShake.Instance.Shake();
         OnHealthChanged?.Invoke(currentHealth, maxHealth);

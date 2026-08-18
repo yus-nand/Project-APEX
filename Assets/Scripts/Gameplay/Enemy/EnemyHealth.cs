@@ -30,6 +30,9 @@ public class EnemyHealth : MonoBehaviour
         gameObject.GetComponent<EnemyDamage>().Damage = data.contactDamage;
         xpGemCount = data.xpGemCount;
         currentHealth = maxHealth;
+
+        EnemyStateMachine stateMachine = GetComponent<EnemyStateMachine>();
+        stateMachine.Initialize(new ChaseState(stateMachine, GetComponent<EnemyMovement>()));
     }
     private void Die()
     {
