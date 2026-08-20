@@ -12,4 +12,8 @@ public class EnemyData : ScriptableObject
     public int contactDamage = 2;
     public int xpGemCount = 1;
     public float recoveryDuration = 1f;
+    [Header("Dash")]
+    public bool isDasher;
+    public float dashSpeed = 10f;
+    public float dashDuration = 0.5f;
 }

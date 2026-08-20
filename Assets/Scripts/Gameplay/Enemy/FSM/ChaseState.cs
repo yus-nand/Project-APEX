@@ -13,6 +13,10 @@ public class ChaseState : EnemyState
     {
        
     }
+    public override void OnPlayerContact()
+    {
+        stateMachine.ChangeState(new AttackState(stateMachine, movement, movement.GetComponent<EnemyDamage>(), movement.GetComponent<EnemyHealth>()));
+    }
     public override void Exit()
     {
         movement.SetMovementEnabled(false);

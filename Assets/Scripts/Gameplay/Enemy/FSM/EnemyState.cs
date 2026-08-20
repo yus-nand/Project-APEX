@@ -13,6 +13,10 @@ public abstract class EnemyState
     {
         
     }
+    public virtual void OnPlayerContact()
+    {
+        
+    }
     public virtual void Update()
     {
         

@@ -18,3 +18,4 @@ MonoBehaviour:
   moveSpeed: 1.5
   contactDamage: 4
   xpGemCount: 5
+  recoveryDuration: 2

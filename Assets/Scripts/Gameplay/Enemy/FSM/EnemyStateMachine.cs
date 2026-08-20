@@ -21,15 +21,11 @@ public class EnemyStateMachine : MonoBehaviour
         CurrentState = newState;
         CurrentState.Enter();
     }
-    public void OnPlayerContact()
-    {
-        if(CurrentState is ChaseState)
-        {
-            ChangeState(new AttackState(this, GetComponent<EnemyMovement>(), GetComponent<EnemyDamage>(), GetComponent<EnemyHealth>()));
-        }
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        OnPlayerContact();
+        if(!collision.gameObject.CompareTag("Player"))
+            return;
+
+        CurrentState?.OnPlayerContact();
     }
 }

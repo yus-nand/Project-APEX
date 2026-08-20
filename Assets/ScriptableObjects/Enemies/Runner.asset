@@ -15,6 +15,7 @@ MonoBehaviour:
   enemyName: Runner
   prefab: {fileID: 3279616993175668571, guid: 853594a70265fba499fdd12a0ef01158, type: 3}
   maxHealth: 3
-  moveSpeed: 5
+  moveSpeed: 4.8
   contactDamage: 2
   xpGemCount: 1
+  recoveryDuration: 0.8

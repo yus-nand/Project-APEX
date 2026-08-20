@@ -28,14 +28,20 @@ public class EnemyHealth : MonoBehaviour
         this.xpGemPool = xpGemPool;
         transform.position = position;
         maxHealth = data.maxHealth;
-        gameObject.GetComponent<EnemyMovement>().MoveSpeed = data.moveSpeed;
-        gameObject.GetComponent<EnemyDamage>().Damage = data.contactDamage;
+        EnemyMovement movement = GetComponent<EnemyMovement>();
+        movement.MoveSpeed = data.moveSpeed;
+        movement.DashSpeed = data.dashSpeed;
+        movement.DashDuration = data.dashDuration;
+        GetComponent<EnemyDamage>().Damage = data.contactDamage;
         xpGemCount = data.xpGemCount;
         currentHealth = maxHealth;
         recoveryDuration = data.recoveryDuration;
 
         EnemyStateMachine stateMachine = GetComponent<EnemyStateMachine>();
-        stateMachine.Initialize(new ChaseState(stateMachine, GetComponent<EnemyMovement>()));
+        if(data.isDasher)
+            stateMachine.Initialize(new DashState(stateMachine, GetComponent<EnemyMovement>(), GetComponent<EnemyDamage>(), this));
+        else
+            stateMachine.Initialize(new ChaseState(stateMachine, GetComponent<EnemyMovement>()));
     }
     private void Die()
     {

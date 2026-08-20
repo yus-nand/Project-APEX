@@ -10,12 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2866f523e79fa549ab0da68e1ec02ed, type: 3}
-  m_Name: Jombie
+  m_Name: Dasher
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: Jombie
-  prefab: {fileID: 2762049729330723589, guid: f3b6cdc5e735b9d43980ef46ffef5f23, type: 3}
-  maxHealth: 5
-  moveSpeed: 3
-  contactDamage: 1
-  xpGemCount: 1
-  recoveryDuration: 1
+  enemyName: Dasher
+  prefab: {fileID: 6513012090594442363, guid: 091d40d2608a18244960e3a5ab50762c, type: 3}
+  maxHealth: 6
+  moveSpeed: 1
+  contactDamage: 3
+  xpGemCount: 2
+  recoveryDuration: 3
+  isDasher: 1
+  dashSpeed: 20
+  dashDuration: 1
