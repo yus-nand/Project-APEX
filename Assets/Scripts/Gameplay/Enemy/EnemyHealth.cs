@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
+    [SerializeField] private ObjectPool deathEffectPool;
     private ObjectPool pool;
     private ObjectPool xpGemPool;
     private int maxHealth = 3;
@@ -22,12 +23,13 @@ public class EnemyHealth : MonoBehaviour
             Die();
         }
     }
-    public void Initialize(ObjectPool pool, Vector3 position, EnemyData data, ObjectPool xpGemPool)
+    public void Initialize(ObjectPool pool, Vector3 position, EnemyData data, ObjectPool xpGemPool, ObjectPool deathParticlePool)
     {
         this.pool = pool;
         this.xpGemPool = xpGemPool;
         transform.position = position;
         maxHealth = data.maxHealth;
+        deathEffectPool = deathParticlePool;
         EnemyMovement movement = GetComponent<EnemyMovement>();
         movement.MoveSpeed = data.moveSpeed;
         movement.DashSpeed = data.dashSpeed;
@@ -45,8 +47,21 @@ public class EnemyHealth : MonoBehaviour
     }
     private void Die()
     {
-        Vector3 deathPosition = transform.position;
+        Vector2 deathPosition = transform.position;
         pool.Return(gameObject);
+        SpawnDeathEffect();
+        DropXP_Gems(deathPosition);
+    }
+    private void SpawnDeathEffect()
+    {
+        GameObject effect = deathEffectPool.Get();
+        effect.transform.position = transform.position;
+        effect.transform.rotation = Quaternion.identity;
+
+        effect.GetComponent<ParticleAutoReturn>().Initialize(deathEffectPool);
+    }
+    private void DropXP_Gems(Vector2 deathPosition)
+    {
         for(int i = 0; i < xpGemCount; i++)
         {
             GameObject xpGem = xpGemPool.Get();
