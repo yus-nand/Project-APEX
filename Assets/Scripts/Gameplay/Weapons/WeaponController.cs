@@ -5,6 +5,7 @@ public class WeaponController : MonoBehaviour
 {
     [Header("Weapon Settings")]
     [SerializeField] private ObjectPool bulletPool;
+    [SerializeField] private ObjectPool bulletImpactEffectPool;
     [SerializeField] private Transform firePoint;
     [SerializeField] private float burstDelay = 0.08f;
     // [SerializeField] private float fireInterval = 1f;
@@ -66,6 +67,6 @@ public class WeaponController : MonoBehaviour
         bullet.transform.rotation = Quaternion.identity;
         Projectile projectile = bullet.GetComponent<Projectile>();
         Vector2 direction = (target.position - firePoint.position).normalized;
-        projectile.Initialize(bulletPool, direction, stats.ProjectileSpeedMultilpier, stats.Damage);
+        projectile.Initialize(bulletPool, bulletImpactEffectPool, direction, stats.ProjectileSpeedMultilpier, stats.Damage);
     }
 }

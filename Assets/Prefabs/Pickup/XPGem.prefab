@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3966ba99e269a3941b5bcc614bb039ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::XPGem
-  xpValue: 4
-  attractionRadius: 4
   initialSpeed: 3
   acceleration: 15
+  collectAnimationDuration: 0.06
+  collectScale: 0.05
