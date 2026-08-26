@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "EnemyData", menuName = "Game/Enemy Data")]  
 public class EnemyData : ScriptableObject
@@ -6,6 +7,9 @@ public class EnemyData : ScriptableObject
     public string enemyName;
     [Header("Prefab")]
     public GameObject prefab;
+    [Header("Drops")]
+    [SerializeField]private List<PickupData> dropTable = new();
+    public IReadOnlyList<PickupData> DropTable => dropTable;
     [Header("Stats")]
     public int maxHealth = 10;
     public float moveSpeed = 3f;

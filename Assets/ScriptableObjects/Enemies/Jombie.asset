@@ -14,8 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Jombie
   prefab: {fileID: 2762049729330723589, guid: f3b6cdc5e735b9d43980ef46ffef5f23, type: 3}
+  dropTable:
+  - {fileID: 11400000, guid: 11d5729142a84fb4485fbcb862a636e5, type: 2}
   maxHealth: 5
   moveSpeed: 3
   contactDamage: 1
   xpGemCount: 1
   recoveryDuration: 1
+  isDasher: 0
+  dashSpeed: 10
+  dashDuration: 0.5

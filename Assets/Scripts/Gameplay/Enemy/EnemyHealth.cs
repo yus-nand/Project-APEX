@@ -2,18 +2,21 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    [SerializeField] private ObjectPool deathEffectPool;
+    private ObjectPool deathEffectPool;
     private ObjectPool pool;
     private ObjectPool xpGemPool;
+    private PickupSpawner pickupSpawner;
+    private EnemyData enemmyData;
     private int maxHealth = 3;
     private int xpGemCount;
     private int currentHealth;
     private float recoveryDuration;
     public float RecoveryDuration => recoveryDuration;
-
     private void Awake()
     {
         currentHealth = maxHealth;
+        pickupSpawner = FindAnyObjectByType<PickupSpawner>();
+        Debug.Log(pickupSpawner);
     }
     public void TakeDamage(int damage)
     {
@@ -29,6 +32,7 @@ public class EnemyHealth : MonoBehaviour
         this.xpGemPool = xpGemPool;
         transform.position = position;
         maxHealth = data.maxHealth;
+        currentHealth = maxHealth;
         deathEffectPool = deathParticlePool;
         EnemyMovement movement = GetComponent<EnemyMovement>();
         movement.MoveSpeed = data.moveSpeed;
@@ -36,8 +40,8 @@ public class EnemyHealth : MonoBehaviour
         movement.DashDuration = data.dashDuration;
         GetComponent<EnemyDamage>().Damage = data.contactDamage;
         xpGemCount = data.xpGemCount;
-        currentHealth = maxHealth;
         recoveryDuration = data.recoveryDuration;
+        enemmyData = data;
 
         EnemyStateMachine stateMachine = GetComponent<EnemyStateMachine>();
         if(data.isDasher)
@@ -48,9 +52,10 @@ public class EnemyHealth : MonoBehaviour
     private void Die()
     {
         Vector2 deathPosition = transform.position;
-        pool.Return(gameObject);
         SpawnDeathEffect();
         DropXP_Gems(deathPosition);
+        DropPickups(deathPosition);
+        pool.Return(gameObject);
     }
     private void SpawnDeathEffect()
     {
@@ -67,6 +72,17 @@ public class EnemyHealth : MonoBehaviour
             GameObject xpGem = xpGemPool.Get();
             XPGem gem = xpGem.GetComponent<XPGem>();
             gem.Initialize(deathPosition, xpGemPool);
+        }
+    }
+    private void DropPickups(Vector2 deathPosition)
+    {
+        foreach(PickupData pickup in enemmyData.DropTable)
+        {
+            if(Random.value <= pickup.dropChance)
+            {
+                Debug.Log("EnemyHealth: Spawning HealthPickup");
+                pickup.Spawn(deathPosition, pickupSpawner);
+            }
         }
     }
 }

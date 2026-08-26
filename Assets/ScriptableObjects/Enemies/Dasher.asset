@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Dasher
   prefab: {fileID: 6513012090594442363, guid: 091d40d2608a18244960e3a5ab50762c, type: 3}
+  dropTable: []
   maxHealth: 6
   moveSpeed: 1
   contactDamage: 3
