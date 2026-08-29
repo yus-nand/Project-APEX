@@ -1,5 +1,6 @@
 using UnityEngine;
-public class PooledEnemy
+
+public class PooledPickup
 {
     public GameObject gameObject;
     public ObjectPool pool;

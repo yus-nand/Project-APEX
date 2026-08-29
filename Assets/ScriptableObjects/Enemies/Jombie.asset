@@ -15,7 +15,9 @@ MonoBehaviour:
   enemyName: Jombie
   prefab: {fileID: 2762049729330723589, guid: f3b6cdc5e735b9d43980ef46ffef5f23, type: 3}
   dropTable:
-  - {fileID: 11400000, guid: 11d5729142a84fb4485fbcb862a636e5, type: 2}
+  - pickupData: {fileID: 11400000, guid: 11d5729142a84fb4485fbcb862a636e5, type: 2}
+    dropChance: 0.8
+    amount: 0
   maxHealth: 5
   moveSpeed: 3
   contactDamage: 1

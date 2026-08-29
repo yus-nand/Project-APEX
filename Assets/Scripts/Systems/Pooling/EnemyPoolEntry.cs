@@ -1,7 +1,5 @@
-using UnityEngine;
-
 [System.Serializable]
-public class EnemyPoolEntry : MonoBehaviour
+public class EnemyPoolEntry
 {
     public EnemyData enemyData;
     public ObjectPool pool;

@@ -2,12 +2,25 @@ using UnityEngine;
 
 public class PickupSpawner : MonoBehaviour
 {
-    [SerializeField] private ObjectPool healthPickupPool;
-    public void SpawnHealthPickup(Vector3 position, int amount)
+    [SerializeField] private PickupPoolManager pickupPoolManager;
+
+    public void SpawnPickup(PickupDropInfo pickupDropInfo, Vector3 position)
     {
-        Debug.Log("PickupSpawner: Spawning HealthPickups");
-        GameObject healthPickupGO = healthPickupPool.Get();
-        HealthPickup healthPickup = healthPickupGO.GetComponent<HealthPickup>();
-        healthPickup.Initialize(position, healthPickupPool, amount);
+        if(Random.value > pickupDropInfo.dropChance)
+            return;
+
+        pickupDropInfo.pickupData.Spawn(position, this);
+    }
+
+    public void SpawnHealthPickup(PickupData data, Vector3 position, int amount)
+    {
+        PooledPickup pooledPickup = pickupPoolManager.Get(data);
+
+        if(pooledPickup == null)
+            return;
+
+        HealthPickup healthPickup = pooledPickup.gameObject.GetComponent<HealthPickup>();
+
+        healthPickup.Initialize(position, pooledPickup.pool, amount);
     }
 }

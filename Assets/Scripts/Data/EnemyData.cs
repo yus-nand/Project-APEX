@@ -8,8 +8,8 @@ public class EnemyData : ScriptableObject
     [Header("Prefab")]
     public GameObject prefab;
     [Header("Drops")]
-    [SerializeField]private List<PickupData> dropTable = new();
-    public IReadOnlyList<PickupData> DropTable => dropTable;
+    [SerializeField]private List<PickupDropInfo> dropTable = new();
+    public IReadOnlyList<PickupDropInfo> DropTable => dropTable;
     [Header("Stats")]
     public int maxHealth = 10;
     public float moveSpeed = 3f;

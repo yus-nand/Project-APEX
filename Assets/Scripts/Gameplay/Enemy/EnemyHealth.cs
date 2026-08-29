@@ -76,13 +76,10 @@ public class EnemyHealth : MonoBehaviour
     }
     private void DropPickups(Vector2 deathPosition)
     {
-        foreach(PickupData pickup in enemmyData.DropTable)
+        foreach(PickupDropInfo pickupDropInfo in enemmyData.DropTable)
         {
-            if(Random.value <= pickup.dropChance)
-            {
-                Debug.Log("EnemyHealth: Spawning HealthPickup");
-                pickup.Spawn(deathPosition, pickupSpawner);
-            }
+            Debug.Log("EnemyHealth: Spawning HealthPickup");
+            pickupSpawner.SpawnPickup(pickupDropInfo, deathPosition);
         }
     }
 }

@@ -7,6 +7,6 @@ public class HealthPickupData : PickupData
     public override void Spawn(Vector3 spawnPosition, PickupSpawner spawner)
     {
         Debug.Log("HealthPickupData: Spawning HealthPickup");
-        spawner.SpawnHealthPickup(spawnPosition, healAmount);
+        spawner.SpawnHealthPickup(this, spawnPosition, healAmount);
     }
 }

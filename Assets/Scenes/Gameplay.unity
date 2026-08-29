@@ -1804,7 +1804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30396b93cf5efef4aab84cdd4276b477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PickupSpawner
-  healthPickupPool: {fileID: 1990397014}
+  pickupPoolManager: {fileID: 1168864383}
 --- !u!4 &618620247
 Transform:
   m_ObjectHideFlags: 0
@@ -3228,6 +3228,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 271837792}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1168864382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1168864384}
+  - component: {fileID: 1168864383}
+  m_Layer: 0
+  m_Name: PickupPoolManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1168864383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168864382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95436b2407997934681d993cefbe2643, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PickupPoolManager
+  pools:
+  - data: {fileID: 11400000, guid: 11d5729142a84fb4485fbcb862a636e5, type: 2}
+    pool: {fileID: 1990397014}
+--- !u!4 &1168864384
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168864382}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.05288, y: 0.72553, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1209345037
 GameObject:
   m_ObjectHideFlags: 0
@@ -3438,10 +3485,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPoolManager
   pools:
-  - {fileID: 586926699}
-  - {fileID: 224120814}
-  - {fileID: 1793117516}
-  - {fileID: 11859704}
+  - enemyData: {fileID: 11400000, guid: d78e32c82851f0142996c6c116424916, type: 2}
+    pool: {fileID: 586926697}
+  - enemyData: {fileID: 11400000, guid: 4e7065dabe231264e8cd9c1e4906b256, type: 2}
+    pool: {fileID: 224120815}
+  - enemyData: {fileID: 11400000, guid: 8c7fc1cb8e479994187e31e33bc5c1de, type: 2}
+    pool: {fileID: 1793117517}
+  - enemyData: {fileID: 11400000, guid: 39b0bdfb75ddb1442bee9743da0a6062, type: 2}
+    pool: {fileID: 11859705}
 --- !u!4 &1255750635
 Transform:
   m_ObjectHideFlags: 0
@@ -5143,3 +5194,4 @@ SceneRoots:
   - {fileID: 757794848}
   - {fileID: 1255750635}
   - {fileID: 618620247}
+  - {fileID: 1168864384}
