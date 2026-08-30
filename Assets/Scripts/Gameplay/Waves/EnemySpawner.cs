@@ -5,6 +5,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private EnemyPoolManager enemyPoolManager;
     [SerializeField] private ObjectPool xpGemPool;
     [SerializeField] private ObjectPool deathParticlePool;
+    [SerializeField] private ObjectPool enemyProjectilePool;
     [Header("Spawner Settings")]
     // [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private Transform[] spawnPoints;
@@ -18,6 +19,6 @@ public class EnemySpawner : MonoBehaviour
 
         GameObject enemy = pooledEnemy.gameObject;
         EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
-        enemyHealth.Initialize(pooledEnemy.pool, spawnPoints[randomIndex].position, data, xpGemPool, deathParticlePool);
+        enemyHealth.Initialize(pooledEnemy.pool, spawnPoints[randomIndex].position, data, xpGemPool, deathParticlePool, enemyProjectilePool);
     }
 }

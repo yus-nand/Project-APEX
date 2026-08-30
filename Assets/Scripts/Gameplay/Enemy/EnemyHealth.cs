@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class EnemyHealth : MonoBehaviour
+public class EnemyHealth : MonoBehaviour, IDamageable
 {
     private ObjectPool deathEffectPool;
     private ObjectPool pool;
@@ -26,7 +26,7 @@ public class EnemyHealth : MonoBehaviour
             Die();
         }
     }
-    public void Initialize(ObjectPool pool, Vector3 position, EnemyData data, ObjectPool xpGemPool, ObjectPool deathParticlePool)
+    public void Initialize(ObjectPool pool, Vector3 position, EnemyData data, ObjectPool xpGemPool, ObjectPool deathParticlePool, ObjectPool enemyProjectilePool)
     {
         this.pool = pool;
         this.xpGemPool = xpGemPool;
@@ -46,6 +46,14 @@ public class EnemyHealth : MonoBehaviour
         EnemyStateMachine stateMachine = GetComponent<EnemyStateMachine>();
         if(data.isDasher)
             stateMachine.Initialize(new DashState(stateMachine, GetComponent<EnemyMovement>(), GetComponent<EnemyDamage>(), this));
+        else if(data.isRanged)
+        {
+            EnemyRangedAttack rangedAttack = GetComponent<EnemyRangedAttack>();
+            rangedAttack.Initialize(enemyProjectilePool);
+            rangedAttack.Damage = data.projectileDamage;
+            rangedAttack.ProjectileSpeedMultiplier = data.projectileSpeedMultiplier;
+            stateMachine.ChangeState(new KiteState(stateMachine, movement, rangedAttack, this, data.preferredRange));
+        }
         else
             stateMachine.Initialize(new ChaseState(stateMachine, GetComponent<EnemyMovement>()));
     }

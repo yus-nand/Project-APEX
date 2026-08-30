@@ -357,6 +357,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1126208145}
     m_Modifications:
+    - target: {fileID: 325711751849390435, guid: 4d738cb138e25404b8e3cbe66750374a, type: 3}
+      propertyPath: m_fontSize
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 325711751849390435, guid: 4d738cb138e25404b8e3cbe66750374a, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 325711751849390435, guid: 4d738cb138e25404b8e3cbe66750374a, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 325711751849390435, guid: 4d738cb138e25404b8e3cbe66750374a, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5117728415408471870, guid: 4d738cb138e25404b8e3cbe66750374a, type: 3}
       propertyPath: m_Name
       value: Card (2)
@@ -574,6 +590,7 @@ MonoBehaviour:
   enemyPoolManager: {fileID: 1255750634}
   xpGemPool: {fileID: 1036886578}
   deathParticlePool: {fileID: 109737296}
+  enemyProjectilePool: {fileID: 1123589179}
   spawnPoints:
   - {fileID: 783435965}
   - {fileID: 559689691}
@@ -1551,7 +1568,7 @@ GameObject:
   - component: {fileID: 508732531}
   - component: {fileID: 508732530}
   m_Layer: 0
-  m_Name: BulletPool
+  m_Name: PlayerProjectilePool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2860,6 +2877,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1126208145}
     m_Modifications:
+    - target: {fileID: 325711751849390435, guid: 4d738cb138e25404b8e3cbe66750374a, type: 3}
+      propertyPath: m_fontSize
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 325711751849390435, guid: 4d738cb138e25404b8e3cbe66750374a, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 325711751849390435, guid: 4d738cb138e25404b8e3cbe66750374a, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 325711751849390435, guid: 4d738cb138e25404b8e3cbe66750374a, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2203513086890539998, guid: 4d738cb138e25404b8e3cbe66750374a, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -2993,6 +3026,52 @@ Transform:
   - {fileID: 1799751289}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1123589177
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1123589178}
+  - component: {fileID: 1123589179}
+  m_Layer: 0
+  m_Name: EnemyProjectilePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1123589178
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123589177}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.4416401, y: 1.0746701, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1452686021}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1123589179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123589177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 866c99c4d0c256344a69acc191ed836e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
+  prefab: {fileID: 7384769235398276746, guid: 960fc39e662728a4cb0e59bf39db84df, type: 3}
+  intitialSize: 50
 --- !u!1 &1126208144
 GameObject:
   m_ObjectHideFlags: 0
@@ -3493,6 +3572,8 @@ MonoBehaviour:
     pool: {fileID: 1793117517}
   - enemyData: {fileID: 11400000, guid: 39b0bdfb75ddb1442bee9743da0a6062, type: 2}
     pool: {fileID: 11859705}
+  - enemyData: {fileID: 11400000, guid: 11ec7bddd7ec2fb489b8825e5c355b2f, type: 2}
+    pool: {fileID: 1567448991}
 --- !u!4 &1255750635
 Transform:
   m_ObjectHideFlags: 0
@@ -3516,6 +3597,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1126208145}
     m_Modifications:
+    - target: {fileID: 325711751849390435, guid: 4d738cb138e25404b8e3cbe66750374a, type: 3}
+      propertyPath: m_fontSize
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 325711751849390435, guid: 4d738cb138e25404b8e3cbe66750374a, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 325711751849390435, guid: 4d738cb138e25404b8e3cbe66750374a, type: 3}
+      propertyPath: m_VerticalAlignment
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 325711751849390435, guid: 4d738cb138e25404b8e3cbe66750374a, type: 3}
+      propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5117728415408471870, guid: 4d738cb138e25404b8e3cbe66750374a, type: 3}
       propertyPath: m_Name
       value: Card (1)
@@ -3671,9 +3768,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 508732531}
+  - {fileID: 1123589178}
   - {fileID: 1036886579}
   - {fileID: 1990397013}
   - {fileID: 586926698}
+  - {fileID: 1567448989}
   - {fileID: 224120816}
   - {fileID: 1793117515}
   - {fileID: 11859706}
@@ -4197,6 +4296,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1556130085}
   m_CullTransparentMesh: 1
+--- !u!1 &1567448988
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1567448989}
+  - component: {fileID: 1567448991}
+  - component: {fileID: 1567448990}
+  m_Layer: 0
+  m_Name: ShooterPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1567448989
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567448988}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 605.87085, y: 855.9775, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1452686021}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1567448990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567448988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 196e86cd41133c340bf738e53164ead0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyPoolEntry
+  enemyData: {fileID: 11400000, guid: d78e32c82851f0142996c6c116424916, type: 2}
+  pool: {fileID: 1567448991}
+--- !u!114 &1567448991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1567448988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 866c99c4d0c256344a69acc191ed836e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObjectPool
+  prefab: {fileID: 6513012090594442363, guid: 4eb0a0cb7e1fb914d9e8f1d29b70f537, type: 3}
+  intitialSize: 20
 --- !u!1 &1591193965
 GameObject:
   m_ObjectHideFlags: 0

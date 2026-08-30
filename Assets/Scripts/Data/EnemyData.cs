@@ -20,4 +20,9 @@ public class EnemyData : ScriptableObject
     public bool isDasher;
     public float dashSpeed = 10f;
     public float dashDuration = 0.5f;
+    [Header("Ranged")]
+    public bool isRanged;
+    public float preferredRange = 6f;
+    public int projectileDamage = 1;
+    public float projectileSpeedMultiplier = 1f;
 }

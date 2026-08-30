@@ -4,13 +4,15 @@ public class RecoveryState : EnemyState
 {
     private EnemyMovement movement;
     private EnemyHealth health;
+    private EnemyState nextState;
     private float recoveryDuration = 1f;
     private float timer;
     
-    public RecoveryState(EnemyStateMachine stateMachine, EnemyMovement movement, EnemyHealth health) : base(stateMachine)
+    public RecoveryState(EnemyStateMachine stateMachine, EnemyMovement movement, EnemyHealth health, EnemyState nextState) : base(stateMachine)
     {
         this.movement = movement;
         this.health = health;
+        this.nextState = nextState;
     }
     public override void Enter()
     {
@@ -22,7 +24,7 @@ public class RecoveryState : EnemyState
         timer += Time.deltaTime;
         if(timer >= health.RecoveryDuration)
         {
-            stateMachine.ChangeState(new ChaseState(stateMachine, movement));
+            stateMachine.ChangeState(nextState);
         }
     }
 }

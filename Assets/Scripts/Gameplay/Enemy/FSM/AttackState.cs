@@ -19,6 +19,6 @@ public class AttackState : EnemyState
         damage.DealDamage();
 
         Debug.Log("sRECOVERY: Entering recovery state");
-        stateMachine.ChangeState(new RecoveryState(stateMachine, movement, movement.gameObject.GetComponent<EnemyHealth>()));
+        stateMachine.ChangeState(new RecoveryState(stateMachine, movement, health, new ChaseState(stateMachine, movement)));
     }
 }

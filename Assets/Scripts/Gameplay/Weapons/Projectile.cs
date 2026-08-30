@@ -44,10 +44,10 @@ public class Projectile : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Bullet Hit: " + other.name);
-        EnemyHealth enemyHealth = other.gameObject.GetComponent<EnemyHealth>();
-        if(enemyHealth == null)
+        IDamageable target = other.gameObject.GetComponent<IDamageable>();
+        if(target == null)
             return;
-        enemyHealth.TakeDamage(damage);
+        target.TakeDamage(damage);
         SpawnImpact(other.ClosestPoint(transform.position));
         pool.Return(gameObject);
     }

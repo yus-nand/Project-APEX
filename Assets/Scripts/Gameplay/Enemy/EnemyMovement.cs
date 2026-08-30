@@ -6,10 +6,13 @@ public class EnemyMovement : MonoBehaviour
     private float moveSpeed;
     private float dashSpeed;
     private float dashDuration;
+    private float kiteRange = 0f;
+    [SerializeField] private float kiteBuffer = 0.5f;
     private Rigidbody2D rb;
     private Transform player;
     private bool movementEnabled = true;
     private bool dashing = false;
+    private bool kiting = false;
     public float MoveSpeed{get{return moveSpeed;}set{moveSpeed = value;}}
     public float DashSpeed{get{return dashSpeed;} set{dashSpeed = value;}}
     public float DashDuration{get{return dashDuration;} set{dashDuration = value;}}
@@ -36,12 +39,37 @@ public class EnemyMovement : MonoBehaviour
             rb.linearVelocity = Vector2.zero;
         }
     }
+    public void EnableKiting(float range)
+    {
+        kiting = true;
+        kiteRange = range;
+    }
+    public void DisableKiting()
+    {
+        kiting = false;
+    }
     private void FixedUpdate()
     {
         if(player == null || !movementEnabled || dashing)
             return;
 
-        Vector2 direction = (player.position - transform.position).normalized;
+        Vector2 toPlayer = (player.position - transform.position).normalized;
+        Vector2 direction;
+
+        if(kiting)
+        {
+            float distance = toPlayer.magnitude;
+            if(distance > kiteRange + kiteBuffer)
+                direction = -toPlayer;
+            else if(distance < kiteRange - kiteBuffer)
+                direction = toPlayer;
+            else
+                direction = Vector2.zero;
+        }
+        else
+        {
+            direction = toPlayer;
+        }
         rb.linearVelocity = direction * moveSpeed;
     }
     public void StartDash(Vector2 direction)

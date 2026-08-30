@@ -14,8 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Tank
   prefab: {fileID: 2762049729330723589, guid: 595b6efb2123198439b8608d7fa271c4, type: 3}
-  maxHealth: 10
+  dropTable:
+  - pickupData: {fileID: 11400000, guid: 11d5729142a84fb4485fbcb862a636e5, type: 2}
+    dropChance: 0.4
+    amount: 2
+  maxHealth: 20
   moveSpeed: 1.5
   contactDamage: 4
   xpGemCount: 5
   recoveryDuration: 2
+  isDasher: 0
+  dashSpeed: 10
+  dashDuration: 0.5
+  isRanged: 0
+  preferredRange: 6
+  projectileDamage: 1
+  projectileSpeedMultiplier: 1
