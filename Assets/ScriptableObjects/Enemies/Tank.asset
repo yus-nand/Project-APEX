@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Tank
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Tank
+  type: 2
   prefab: {fileID: 2762049729330723589, guid: 595b6efb2123198439b8608d7fa271c4, type: 3}
   dropTable:
   - pickupData: {fileID: 11400000, guid: 11d5729142a84fb4485fbcb862a636e5, type: 2}
@@ -23,10 +24,11 @@ MonoBehaviour:
   contactDamage: 4
   xpGemCount: 5
   recoveryDuration: 2
-  isDasher: 0
-  dashSpeed: 10
-  dashDuration: 0.5
-  isRanged: 0
+  lastResortHealthValue: 8
+  dashSpeed: 16
+  dashDuration: 1
   preferredRange: 6
   projectileDamage: 1
   projectileSpeedMultiplier: 1
+  splitChildData: {fileID: 0}
+  splitChildCount: 2

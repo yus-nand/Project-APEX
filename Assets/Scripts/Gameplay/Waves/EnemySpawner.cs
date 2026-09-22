@@ -13,12 +13,16 @@ public class EnemySpawner : MonoBehaviour
     public void SpawnEnemy(EnemyData data)
     {
         int randomIndex = Random.Range(0, spawnPoints.Length);
+        SpawnEnemyAt(data, spawnPoints[randomIndex].position);
+    }
+    public  void SpawnEnemyAt(EnemyData data, Vector3 position)
+    {
         PooledEnemy pooledEnemy = enemyPoolManager.Get(data);
         if(pooledEnemy == null)
             return;
 
         GameObject enemy = pooledEnemy.gameObject;
         EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
-        enemyHealth.Initialize(pooledEnemy.pool, spawnPoints[randomIndex].position, data, xpGemPool, deathParticlePool, enemyProjectilePool);
+        enemyHealth.Initialize(pooledEnemy.pool, position, data, xpGemPool, deathParticlePool, enemyProjectilePool);
     }
 }

@@ -14,7 +14,7 @@ public class AttackState : EnemyState
     }
     public override void Enter()
     {
-        movement.SetMovementEnabled(false);
+        // movement.SetMovementEnabled(false);
         Debug.Log("sATTACK: Entered attack state");
         damage.DealDamage();
 

@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public abstract class EnemyState
 {
     protected EnemyStateMachine stateMachine;
@@ -15,7 +17,7 @@ public abstract class EnemyState
     }
     public virtual void OnPlayerContact()
     {
-        
+        Debug.Log("ENEMY STATE: Super class method");
     }
     public virtual void Update()
     {

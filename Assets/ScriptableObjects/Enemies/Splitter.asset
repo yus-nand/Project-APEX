@@ -10,25 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d2866f523e79fa549ab0da68e1ec02ed, type: 3}
-  m_Name: Shooter
+  m_Name: Splitter
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
-  enemyName: Shooter
-  type: 4
-  prefab: {fileID: 6513012090594442363, guid: 4eb0a0cb7e1fb914d9e8f1d29b70f537, type: 3}
-  dropTable:
-  - pickupData: {fileID: 11400000, guid: 11d5729142a84fb4485fbcb862a636e5, type: 2}
-    dropChance: 0.2
-    amount: 1
-  maxHealth: 5
-  moveSpeed: 2.8
+  enemyName: Splitter
+  type: 5
+  prefab: {fileID: 2762049729330723589, guid: 170003054c541a74a97fea08ee858c19, type: 3}
+  dropTable: []
+  maxHealth: 6
+  moveSpeed: 3
   contactDamage: 1
-  xpGemCount: 2
+  xpGemCount: 0
   recoveryDuration: 1
   lastResortHealthValue: 8
   dashSpeed: 10
   dashDuration: 0.5
-  preferredRange: 12
-  projectileDamage: 2
+  preferredRange: 6
+  projectileDamage: 1
   projectileSpeedMultiplier: 1
   splitChildData: {fileID: 0}
   splitChildCount: 2

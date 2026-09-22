@@ -81,6 +81,7 @@ public class EnemyMovement : MonoBehaviour
     {
         dashing = false;
         rb.linearVelocity = Vector2.zero;
+
     }
     public Vector2 GetPlayerPosition()
     {

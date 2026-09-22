@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 
 public class DashState : EnemyState
@@ -10,12 +9,14 @@ public class DashState : EnemyState
     private float timer;
     private Vector2 dashDirection;
     private bool damageDealt;
+    private bool dieAfterDash;
 
-    public DashState(EnemyStateMachine stateMachine, EnemyMovement movement, EnemyDamage damage, EnemyHealth health) : base(stateMachine)
+    public DashState(EnemyStateMachine stateMachine, EnemyMovement movement, EnemyDamage damage, EnemyHealth health, bool dieAfterDash = false) : base(stateMachine)
     {
         this.movement = movement;
         this.damage = damage;
         this.health = health;
+        this.dieAfterDash = dieAfterDash;
     }
     public override void Enter()
     {
@@ -34,7 +35,12 @@ public class DashState : EnemyState
         if(timer >= movement.DashDuration)
         {
             movement.EndDash();
-            stateMachine.ChangeState(new DashRecoveryState(stateMachine, movement, health));
+            if(dieAfterDash)
+            {
+                health.TakeDamage(100);
+                return;
+            }
+            stateMachine.ChangeState(new RecoveryState(stateMachine, movement, health, new DashState(stateMachine, movement, damage, health)));
         }
     }
     public override void OnPlayerContact()
@@ -44,5 +50,9 @@ public class DashState : EnemyState
 
         damage.DealDamage();
         damageDealt = true;
+        if(dieAfterDash)
+        {
+            health.TakeDamage(100);
+        }
     }
 }

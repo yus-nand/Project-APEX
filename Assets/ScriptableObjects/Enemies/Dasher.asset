@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Dasher
   m_EditorClassIdentifier: Assembly-CSharp::EnemyData
   enemyName: Dasher
+  type: 3
   prefab: {fileID: 6513012090594442363, guid: 091d40d2608a18244960e3a5ab50762c, type: 3}
   dropTable:
   - pickupData: {fileID: 11400000, guid: 11d5729142a84fb4485fbcb862a636e5, type: 2}
@@ -23,10 +24,11 @@ MonoBehaviour:
   contactDamage: 3
   xpGemCount: 2
   recoveryDuration: 2
-  isDasher: 1
+  lastResortHealthValue: 8
   dashSpeed: 20
   dashDuration: 1
-  isRanged: 0
   preferredRange: 6
   projectileDamage: 1
   projectileSpeedMultiplier: 1
+  splitChildData: {fileID: 0}
+  splitChildCount: 2
