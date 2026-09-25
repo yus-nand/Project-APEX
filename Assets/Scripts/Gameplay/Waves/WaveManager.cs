@@ -22,7 +22,7 @@ public class WaveManager : MonoBehaviour
     public event Action<bool> OnCountdownVisibilityChanged;
 
     public float RemainingTimer {get; private set;}
-    public float CurrentWave => currentWaveIndex + 1;
+    public int CurrentWave => currentWaveIndex + 1;
     public WaveState CurrentState => state;
     private int currentWaveIndex;
     private bool skipRequested = false;

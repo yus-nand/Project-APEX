@@ -27,5 +27,5 @@ MonoBehaviour:
   preferredRange: 6
   projectileDamage: 1
   projectileSpeedMultiplier: 1
-  splitChildData: {fileID: 0}
+  splitChildData: {fileID: 11400000, guid: 4e7065dabe231264e8cd9c1e4906b256, type: 2}
   splitChildCount: 2
