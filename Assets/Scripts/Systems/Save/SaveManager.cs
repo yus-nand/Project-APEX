@@ -29,6 +29,23 @@ public class SaveManager : MonoBehaviour
 
         _ = SaveAsync();
     }
+    public void RecordStageComplete(StageData stageData)
+    {
+        currentData.coins += stageData.currencyReward;
+        currentData.statistics.totalRunsPlayed ++;
+
+        if(stageData.nextStage != null && !currentData.unlocks.Contains(stageData.nextStage.id))
+            currentData.unlocks.Add(stageData.nextStage.id);
+
+        _ = SaveAsync();
+    }
+    public bool IsStageUnlocked(StageData stage, StageDatabase stageDatabase)
+    {
+        if(stageDatabase.Stages.Count > 0 && stageDatabase.Stages[0] == stage)
+            return true;
+
+        return currentData.unlocks.Contains(stage.id);
+    }
     private async Task SaveAsync()
     {
         await repository.SaveAsync(currentData);

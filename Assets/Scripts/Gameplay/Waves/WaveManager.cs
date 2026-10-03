@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public enum WaveState
@@ -13,25 +12,27 @@ public enum WaveState
 public class WaveManager : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private WaveDatabase waveDatabase;
     [SerializeField] private EnemySpawner spawner;
     [SerializeField] private StartNextWaveButton button;
     public event Action<float> OnRemainingTimerChanged;
     public event Action<int> OnWaveStarted;
     public event Action<string> OnCountdownStarted;
     public event Action<bool> OnCountdownVisibilityChanged;
+    public event Action OnAllWavesCompleted;
 
     public float RemainingTimer {get; private set;}
     public int CurrentWave => currentWaveIndex + 1;
     public WaveState CurrentState => state;
+    private WaveDatabase waveDatabase;
     private int currentWaveIndex;
     private bool skipRequested = false;
     private WaveState state;
-
-    private void Start()
+    public void Initialize(WaveDatabase database)
     {
-        StartCoroutine(WaveLoop());
+        waveDatabase = database;
+        currentWaveIndex = 0;
         state = WaveState.Countdown;
+        StartCoroutine(WaveLoop());
     }
     private IEnumerator WaveLoop()
     {
@@ -44,6 +45,7 @@ public class WaveManager : MonoBehaviour
             currentWaveIndex++;
         }
         Debug.Log("All Waves Completed");
+        OnAllWavesCompleted?.Invoke();
     }
     private IEnumerator Countdown()
     {
