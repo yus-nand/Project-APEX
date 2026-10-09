@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 376fe3344c932a849b43d29f41ff38bc, type: 3}
-  m_Name: Stage 2
+  m_Name: Stage 6
   m_EditorClassIdentifier: Assembly-CSharp::StageData
-  id: s02
-  stageName: Stage 2
-  waveDatabase: {fileID: 11400000, guid: ee15b7c05492ae74ca2bc345c481bb5b, type: 2}
-  currencyReward: 20
-  nextStage: {fileID: 11400000, guid: 53c74871bb271e04a9c9c597f6d3d5be, type: 2}
+  id: s06
+  stageName: Stage 6
+  waveDatabase: {fileID: 11400000, guid: 78b541a7dc77a65448a14f36c654978d, type: 2}
+  currencyReward: 35
+  nextStage: {fileID: 11400000, guid: eeb1c6aff6a8a65438bbb1d96e739127, type: 2}

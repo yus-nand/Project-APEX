@@ -13,11 +13,9 @@ MonoBehaviour:
   m_Name: Wave 3
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
   duration: 60
-  spawnInterval: 1
+  spawnInterval: 0.65
   spawnInfos:
-  - enemyData: {fileID: 11400000, guid: 8c7fc1cb8e479994187e31e33bc5c1de, type: 2}
-    count: 1
   - enemyData: {fileID: 11400000, guid: 11ec7bddd7ec2fb489b8825e5c355b2f, type: 2}
     count: 3
-  - enemyData: {fileID: 11400000, guid: 4e7065dabe231264e8cd9c1e4906b256, type: 2}
+  - enemyData: {fileID: 11400000, guid: d78e32c82851f0142996c6c116424916, type: 2}
     count: 2

@@ -17,5 +17,3 @@ MonoBehaviour:
   spawnInfos:
   - enemyData: {fileID: 11400000, guid: aab08d19dec235241bd62a61a2ba9d9e, type: 2}
     count: 3
-  - enemyData: {fileID: 11400000, guid: 39b0bdfb75ddb1442bee9743da0a6062, type: 2}
-    count: 2

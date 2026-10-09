@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 32726222e8dd6404cbf07af485e08050, type: 3}
-  m_Name: Stage2_WaveDatabase
+  m_Name: Stage6_WaveDatabase
   m_EditorClassIdentifier: Assembly-CSharp::WaveDatabase
   waves:
-  - {fileID: 11400000, guid: d3255f607d5b4da4983caed6cf1607e9, type: 2}
+  - {fileID: 11400000, guid: a21f08950e163d64eb1273db50339731, type: 2}

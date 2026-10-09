@@ -15,9 +15,5 @@ MonoBehaviour:
   duration: 60
   spawnInterval: 1
   spawnInfos:
-  - enemyData: {fileID: 11400000, guid: d78e32c82851f0142996c6c116424916, type: 2}
-    count: 3
   - enemyData: {fileID: 11400000, guid: 4e7065dabe231264e8cd9c1e4906b256, type: 2}
-    count: 7
-  - enemyData: {fileID: 11400000, guid: 39b0bdfb75ddb1442bee9743da0a6062, type: 2}
-    count: 1
+    count: 4
